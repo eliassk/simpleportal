@@ -1,0 +1,10 @@
+#login-form, #register-form, #loggedin{
+    margin: 30px auto;
+    width: 20%;
+    border: 3px solid green;
+    padding: 30px;
+}
+
+.red {
+    color: red;
+}

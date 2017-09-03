@@ -3,9 +3,9 @@
 // Adres serwera MySQL
 const DB_HOST = 'localhost';
 // Nazwa użytkownika
-const DB_USER = 'user';
+const DB_USER = 'root';
 // Hasło użytkownika
-const DB_PASS = 'password';
+const DB_PASS = '123456';
 // Nazwa bazy danych
-const DB_NAME = 'dbname';
+const DB_NAME = 'simple_login';
 ?>
