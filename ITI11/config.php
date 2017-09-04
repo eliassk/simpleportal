@@ -7,5 +7,5 @@ const DB_USER = 'root';
 // Hasło użytkownika
 const DB_PASS = '123456';
 // Nazwa bazy danych
-const DB_NAME = 'simple_login';
+const DB_NAME = 'tutorials';
 ?>

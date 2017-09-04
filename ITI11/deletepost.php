@@ -31,11 +31,8 @@ if (!empty($_SESSION['user'])) {
             header('Location: index.php');
         } else {
             // Jeśli coś poszło nie tak i wystąpiły jakieś błędy wyświetlamy je na ekranie
-            echo "<p class='red' '>Wystąpił błąd podczas dodawania wpisu: {$mysqli->connect_error}</p>";
+            echo "<p class='red'>Wystąpił błąd podczas dodawania wpisu: {$mysqli->error}</p>";
             exit();
         }
-
     }
-
 }
-?>

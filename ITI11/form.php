@@ -1,12 +1,9 @@
+<?php
+//Rozpoczynamy sessje
+session_start();
+?>
 <html>
 <head>
-    <!-- jQuery -->
-    <script
-        src="https://code.jquery.com/jquery-3.2.1.min.js"
-        integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
-        crossorigin="anonymous">
-    </script>
-
     <!-- BOOTSTRAP -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
@@ -14,12 +11,10 @@
     <link rel="stylesheet" href="style.css" />
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
 
-    <title>Strona logowania</title>
+    <title>Formularz</title>
 </head>
 <body>
 <?php
-//Rozpoczynamy sessje
-session_start();
 // Sprawdzamy czy użytkownik jest zalogowany
 if (!empty($_SESSION['user'])) {
     // Sprawdzamy czy użytkownik nie wcisnął przyciska "Wyloguj", sprawdzamy czy istnieje parametr logout w url
@@ -59,12 +54,13 @@ if (!empty($_SESSION['user'])) {
             $sql = "INSERT  INTO `posts` (`id`, `title`, `content`, `authorid`)
             VALUES (NULL, '{$title}', '{$content}', '{$authorid}')";
         }
+
         if ($mysqli->query($sql)) {
             // Jeżeli nie było żadnych błedów przekierowywujemy użytkownika do strony głównej
             header('Location: index.php');
         } else {
             // Jeśli coś poszło nie tak i wystąpiły jakieś błędy wyświetlamy je na ekranie
-            echo "<p class='red' '>Wystąpił błąd podczas dodawania wpisu: {$mysqli->connect_error}</p>";
+            echo "<p class='red'>Wystąpił błąd podczas dodawania wpisu: {$mysqli->error}</p>";
             exit();
         }
     } else {
@@ -80,14 +76,14 @@ if (!empty($_SESSION['user'])) {
             $postid = $title = $content = '';
         }
         // Wyświetlamy menu i formularz, wypełniamy danymi jeśli edytujemy wpis
-        echo ' 
+        echo '
  <nav class="navbar navbar-default">
   <div class="container-fluid">
     <div class="navbar-header">
         <div class="collapse navbar-collapse">
             <ul class="nav navbar-nav">
                 <li><a href="index.php">Strona główna</a></li>
-                <li><a href="newpost.php">Dodaj nowy wpis</a></li>
+                <li><a href="form.php">Dodaj nowy wpis</a></li>
                 <li><a href="index.php?logout=1">Wyloguj</a></li>
             </ul>
         </div>
@@ -97,10 +93,8 @@ if (!empty($_SESSION['user'])) {
 <div class="container">
     <div class="panel panel-default">
         <div class="panel-body">
-            <form class="submit-form container" action="newpost.php" method="post">
-                <div class="form-group">
-                    <input class="form-control" name="postid" type="hidden" value="'.$postid.'"/>
-                </div>
+            <form class="submit-form container" action="form.php" method="post">
+                <input class="form-control" name="postid" type="hidden" value="'.$postid.'"/>
                 <div class="form-group col-md-11">
                     <label for="title">Nagłówek:</label>
                     <input class="form-control" id="title" type="text" name="title" value="'.$title.'"/>
@@ -112,7 +106,7 @@ if (!empty($_SESSION['user'])) {
                 <div class="col-md-10">
                     <input type="submit" name="submit" class="btn btn-default" value="Zapisz" />
                 </div>
-    </form>
+            </form>
         </div>
     </div>
 </div>
